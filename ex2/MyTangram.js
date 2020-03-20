@@ -60,6 +60,7 @@ class MyTangram extends CGFobject {
             this.scene.triangle.display();
             this.scene.popMatrix();
 
+
         this.scene.popMatrix();
         };
 }
