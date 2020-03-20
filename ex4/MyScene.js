@@ -22,9 +22,15 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.quad = new MyQuad(this);
-        this.cube = new MyUnitCube(this);
+        this.axis           = new CGFaxis(this);
+        this.quad           = new MyQuad(this);
+        this.cube           = new MyUnitCube(this);
+        this.diamond        = new MyDiamond(this);
+        this.triangle       = new MyTriangle(this);
+        this.parallelogram  = new MyParallelogram(this);
+        this.trianglesmall  = new MyTriangleSmall(this);
+        this.trianglebig    = new MyTriangleBig(this);
+        this.tangram        = new MyTangram(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -122,7 +128,9 @@ class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
+        //this.quad.display();
+        this.tangram.display();
+        //this.triangle.display();
         //this.cube.display();
 
         // ---- END Primitive drawing section

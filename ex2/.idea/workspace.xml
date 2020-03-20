@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b8d3c39-57c8-4c43-8d59-8b0a9a0b02a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyParallelogram.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyParallelogram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyTangram.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyTangram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyTriangleBig.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyTriangleBig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyTriangleSmall.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyTriangleSmall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyUnitCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyUnitCube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ex2-t4-g12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ex2-t4-g12.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ex4/MyScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ex4/MyScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ex4/MyUnitCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ex4/MyUnitCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ex3/ex3-t4-g12-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ex3/ex3-t4-g12-1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ex3/ex3-t4-g12-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ex4/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ex4/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +17,11 @@
     <session id="1385871086">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="2" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -129,6 +122,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -140,7 +134,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -181,17 +174,17 @@
       <workItem from="1583018964246" duration="35000" />
       <workItem from="1584737811828" duration="218000" />
       <workItem from="1584738143330" duration="1226000" />
+      <workItem from="1584742918846" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13069000" />
+    <option name="totallyTimeSpent" value="13074000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="791" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
