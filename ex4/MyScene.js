@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.trianglesmall  = new MyTriangleSmall(this);
         this.trianglebig    = new MyTriangleBig(this);
         this.tangram        = new MyTangram(this);
+        this.cuberevestido  = new MyUniteCubeQuad(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -129,7 +130,7 @@ class MyScene extends CGFscene {
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         //this.quad.display();
-        this.tangram.display();
+        this.cuberevestido.display();
         //this.triangle.display();
         //this.cube.display();
 

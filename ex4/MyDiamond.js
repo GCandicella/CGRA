@@ -8,6 +8,8 @@ class MyDiamond extends CGFobject {
 		super(scene);
 		this.initBuffers();
 	}
+
+
 	initBuffers() {
 		this.vertices = [
 			-1, 0, 0,	//0
@@ -30,12 +32,7 @@ class MyDiamond extends CGFobject {
 
 		];
 
-        this.texCoords = [
-            0, 1,
-            1, 1,
-            0, 0,
-            1, 0
-        ];
+        this.texCoords = [];
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
@@ -43,5 +40,10 @@ class MyDiamond extends CGFobject {
 
 		this.initGLBuffers();
 	}
+
+    updateTexCoords(coords) {
+        this.texCoords = [...coords];
+        this.updateTexCoordsGLBuffers();
+    }
 }
 

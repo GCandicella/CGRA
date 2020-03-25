@@ -26,14 +26,14 @@ class MyTangram extends CGFobject {
         return cor;
     }
 
-    initTexture() {
+    initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
         let t = new CGFappearance(this.scene);
         t.setAmbient(0.1, 0.1, 0.1, 1);
         t.setDiffuse(0.9, 0.9, 0.9, 1);
         t.setSpecular(0.1, 0.1, 0.1, 1);
         t.setShininess(10.0);
-        t.loadTexture('images/tangram.png');
-        t.setTextureWrap('REPEAT', 'REPEAT');
+        t.loadTexture('images/'+ image + '.png');
+        t.setTextureWrap(wrap1, wrap2);
         return t;
     }
 
@@ -45,7 +45,7 @@ class MyTangram extends CGFobject {
         this.blue = this.initColor(0, 155, 255);
         this.red = this.initColor(255, 30, 30);
         this.yellow = this.initColor(255, 255, 0);
-        this.textTangram = this.initTexture();
+        this.textTangram = this.initTexture("tangram");
     }
 
     static displayShape(shape, revestimento) {
@@ -62,6 +62,14 @@ class MyTangram extends CGFobject {
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2)/2, Math.sqrt(2)/2, 0);
             this.scene.rotate(Math.PI/4, 0, 0, 1);
+            this.diamond.updateTexCoords(
+                [
+                    0, 1/2,
+                    1/4, 3/4,
+                    1/4, 1/4,
+                    1/2, 1/2
+                ]
+            );
             MyTangram.displayShape(this.diamond, this.textTangram);
             this.scene.popMatrix();
 
@@ -69,42 +77,85 @@ class MyTangram extends CGFobject {
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2)/2, -Math.sqrt(2)/2, 0);
             this.scene.rotate(-Math.PI/4, 0, 0, 1);
-            MyTangram.displayShape(this.trianglesmall, this.red);
+            this.trianglesmall.updateTexCoords(
+                [
+                    1/4, 3/4,
+                    3/4, 3/4,
+                    1/2, 1/2
+                ]
+            );
+            MyTangram.displayShape(this.trianglesmall, this.textTangram);
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2), -2*Math.sqrt(2),-1);
             this.scene.scale(-1, 1, 1);
             this.scene.rotate(Math.PI/4, 0, 0, 1);
-            MyTangram.displayShape(this.parallelogram, this.yellow);
+            this.parallelogram.updateTexCoords(
+                [
+                    1/2, 1,
+                    1/4, 3/4,
+                    3/4, 3/4,
+                    1, 1
+                ]
+            );
+            MyTangram.displayShape(this.parallelogram, this.textTangram);
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2)/2, -Math.sqrt(2) -Math.sqrt(2)/2, 0);
             this.scene.rotate(3*Math.PI/4, 0, 0, 1);
-            MyTangram.displayShape(this.trianglesmall, this.purple);
+            this.trianglesmall.updateTexCoords(
+                [
+                    0, 0,
+                    0, 1/2,
+                    1/4, 1/4,
+                ]
+            );
+            MyTangram.displayShape(this.trianglesmall, this.textTangram);
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2), -Math.sqrt(2)/2, 0);
             this.scene.rotate(-Math.PI/2, 0, 0, 1);
-            MyTangram.displayShape(this.trianglebig, this.blue);
+            this.trianglebig.updateTexCoords(
+                [
+                    1, 0,
+                    0, 0,
+                    1/2, 1/2,
+                ]
+            );
+            MyTangram.displayShape(this.trianglebig, this.textTangram);
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.translate(0, -Math.sqrt(2)/2, 0);
             this.scene.rotate(Math.PI/2, 0, 0, 1);
-            MyTangram.displayShape(this.trianglebig, this.orange);
+            this.trianglebig.updateTexCoords(
+                [
+                    1, 1,
+                    1, 0,
+                    1/2, 1/2,
+                ]
+            );
+            MyTangram.displayShape(this.trianglebig, this.textTangram);
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.translate(-2 - Math.sqrt(2), -Math.sqrt(2)/2, 0);
             this.scene.rotate(3*Math.PI/4, 0, 0, 1);
-            MyTangram.displayShape(this.triangle, this.pink);
+            this.triangle.updateTexCoords(
+                [
+                    1/2, 1,
+                    0, 1/2,
+                    0, 1,
+                ]
+            );
+            MyTangram.displayShape(this.triangle, this.textTangram);
             this.scene.popMatrix();
 
         this.scene.popMatrix();
-        
+
         };
 }
 
