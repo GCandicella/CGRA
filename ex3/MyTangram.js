@@ -50,7 +50,7 @@ class MyTangram extends CGFobject {
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2)/2, Math.sqrt(2)/2, 0);
             this.scene.rotate(Math.PI/4, 0, 0, 1);
-            this.diamond.display(); // Fica à escolha do usuário
+            MyTangram.displayShape(this.diamond, this.scene.materials[this.scene.selectedMaterial]);
             this.scene.popMatrix();
 
 
