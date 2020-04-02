@@ -4,15 +4,19 @@ precision highp float;
 
 varying vec2 vTextureCoord;
 
-uniform sampler2D uSampler;
-uniform sampler2D uSampler2;
+uniform sampler2D waterMap;
+uniform sampler2D waterTex;
+uniform float timeFactor;
 
+#define VELOCIDADE_FACTOR 0.01
 void main() {
-	vec4 color = texture2D(uSampler, vTextureCoord);
-	vec4 filtro = texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord);
 
-	if (filtro.b > 0.5)
-		color=vec4(0.52, 0.18, 0.11, 1.0);
-	
-	gl_FragColor = color;
+	vec4 color = texture2D(waterTex, vTextureCoord + timeFactor*VELOCIDADE_FACTOR);   //move the color
+	vec4 map   = texture2D(waterMap, vec2(0.0,0.1) + vTextureCoord + timeFactor*VELOCIDADE_FACTOR);
+
+	map *= 0.2; // mais suave
+
+	vec4 frag = vec4(color.r - map.r, color.g - map.g, color.b - map.b, 1.0);
+
+	gl_FragColor = frag;
 }
