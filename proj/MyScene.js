@@ -10,6 +10,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -26,12 +27,35 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
-        this.cilindro = new MyCylinder(this, 150);
+        this.cilindro = new MyCylinder(this, 50);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
     }
+    initColor(r, g, b) {
+        r /= 255; // deixar de 0 a 1
+        g /= 255; // deixar de 0 a 1
+        b /= 255; // deixar de 0 a 1
+        let cor = new CGFappearance(this);
+        cor.setAmbient(r, g, b, 1.0);
+        cor.setDiffuse(0, 0, 0, 1.0);
+        cor.setSpecular(0, 0, 0, 0);
+        cor.setShininess(10.0);
+        return cor;
+    }
+
+    initMaterials() {
+        this.purplematerial = this.initColor(150, 80, 190);
+        this.pinkmaterial = this.initColor(255, 155, 210);
+        this.greenmaterial = this.initColor(46, 255, 74);
+        this.orangematerial = this.initColor(255, 155, 0);
+        this.bluematerial = this.initColor(0, 155, 255);
+        this.redmaterial = this.initColor(255, 30, 30);
+        this.yellowmaterial = this.initColor(255, 255, 0);
+    }
     initLights() {
+        this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
+
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
@@ -69,6 +93,8 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+
+        this.redmaterial.apply();
 
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();

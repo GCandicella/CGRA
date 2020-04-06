@@ -48,7 +48,7 @@ class MyCylinder extends CGFobject {
             // triangle normal computed by cross product of two edges
             var normal= [
                 saa-sa,
-                ca*saa-sa*caa,
+                - (ca*saa-sa*caa), // 0  para ficar paralelo
                 caa-ca
             ];
 
@@ -86,7 +86,7 @@ class MyCylinder extends CGFobject {
             // triangle normal computed by cross product of two edges
             var normal= [
                 saa-sa,
-                ca*saa-sa*caa,
+                ca*saa-sa*caa, // 0  para ficar paralelo
                 caa-ca
             ];
 
