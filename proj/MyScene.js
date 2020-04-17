@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
         this.initMaterials();
+        this.initTextures();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -26,11 +27,42 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
+        this.sphere = new MySphere(this, 16, 8);
         this.cilindro = new MyCylinder(this, 50);
+        this.vehicle = new MyVehicle(this, 5);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displaySphere = false;
+        this.displayMap = false;
+        this.displayCylinder = false;
+        this.displayVehicle = false;
+    }
+    checkKeys() {
+        if (this.gui.isKeyPressed("KeyW")) {
+            this.vehicle.accelerate(0.1);
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            this.vehicle.accelerate(-0.1);
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            this.vehicle.turn(10);
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            this.vehicle.turn(-10);
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.vehicle.reset();
+        }
+    }
+    initTextures(){
+        this.sphereMaterial = new CGFappearance(this);
+        this.sphereMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.sphereMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.sphereMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.sphereMaterial.setShininess(10.0);
+        this.sphereMaterial.loadTexture("images/earth.jpg");
+        this.sphereMaterial.setTextureWrap("Repeat", "Clamp to edge");
     }
     initColor(r, g, b) {
         r /= 255; // deixar de 0 a 1
@@ -72,7 +104,8 @@ class MyScene extends CGFscene {
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        //To be done...
+        this.checkKeys();
+        this.vehicle.update();
     }
 
     display() {
@@ -93,12 +126,18 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        if (this.displaySphere){
+            this.sphereMaterial.apply();
+            this.sphere.display();
+        }
 
-        this.redmaterial.apply();
+        if(this.displayCylinder){
+            this.cilindro.display();
+        }
 
-        //This sphere does not have defined texture coordinates
-        //this.incompleteSphere.display();
-        this.cilindro.display();
+        if(this.displayVehicle){
+            this.vehicle.display();
+        }
 
         // ---- END Primitive drawing section
     }
