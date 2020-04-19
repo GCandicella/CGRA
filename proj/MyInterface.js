@@ -22,6 +22,11 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, "displayMap").name("Display Map");
         this.gui.add(this.scene, "displayCylinder").name("Display Cylinder");
         this.gui.add(this.scene, "displayVehicle").name("Display Vehicle");
+        this.gui.add(this.scene, 'displaySkybox').name('Display Skybox');
+
+        // Slider to modify Skybox size
+        this.gui.add(this.scene, 'scaleFactorSB', 10, 100).name('Scale Factor SkyBox');
+
         this.initKeys();
 
         return true;

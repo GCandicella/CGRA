@@ -29,6 +29,8 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.sphere = new MySphere(this, 16, 8);
         this.cilindro = new MyCylinder(this, 50);
+        this.skybox = new MyCubeMap(this);
+        this.quad = new MySquare(this);
         this.vehicle = new MyVehicle(this, 5);
 
         //Objects connected to MyInterface
@@ -37,6 +39,8 @@ class MyScene extends CGFscene {
         this.displayMap = false;
         this.displayCylinder = false;
         this.displayVehicle = false;
+        this.displaySkybox = true;
+        this.scaleFactorSB = 50;
     }
     checkKeys() {
         if (this.gui.isKeyPressed("KeyW")) {
@@ -138,6 +142,15 @@ class MyScene extends CGFscene {
         if(this.displayVehicle){
             this.vehicle.display();
         }
+
+        if(this.displaySkybox){
+            this.pushMatrix();
+            this.scale(this.scaleFactorSB, this.scaleFactorSB, this.scaleFactorSB);
+            this.skybox.display();
+            this.popMatrix();
+        }
+
+        //this.quad.display();
 
         // ---- END Primitive drawing section
     }
