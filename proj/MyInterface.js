@@ -27,6 +27,8 @@ class MyInterface extends CGFinterface {
         // Slider to modify Skybox size
         this.gui.add(this.scene, 'scaleFactorSB', 10, 100).name('Scale Factor SkyBox');
 
+        this.gui.add(this.scene, 'selectedMaterial', this.scene.materialIDs).name('Selected Material');
+
         this.initKeys();
 
         return true;

@@ -25,11 +25,6 @@ class MyCubeMap extends CGFobject {
         this.cubemap = this.initTexture("cubemap");
     }
 
-    displayShape(shape, revestimento) {
-        revestimento.apply();
-        shape.display();
-    }
-
     display = function() {
 
         this.scene.pushMatrix();
@@ -37,7 +32,7 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI, 1, 0, 0);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.updateTexCoords([1/2, 2/3, 1/2, 1/3, 1/4, 1/3, 1/4, 2/3  ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
 
@@ -47,7 +42,7 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.updateTexCoords([1/4, 2/3, 1/4, 1, 1/2, 1, 1/2, 2/3 ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
 
@@ -57,7 +52,7 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI, 0, 0, 1);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.updateTexCoords([1/4, 0, 1/4, 1/3, 1/2, 1/3, 1/2, 0 ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
 
@@ -66,7 +61,7 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI, 0, 0, 1);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.quad.updateTexCoords([3/4, 2/3, 3/4, 1/3, 2/4, 1/3, 2/4, 2/3  ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
 
@@ -75,14 +70,14 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.scene.rotate(-Math.PI, 0, 1, 0);
         this.quad.updateTexCoords([0, 1/3, 0, 2/3, 1/4, 2/3, 1/4, 1/3  ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.updateTexCoords([3/4, 1/3, 3/4, 2/3, 1, 2/3, 1, 1/3  ]);
-        this.displayShape(this.quad, this.cubemap);
+        this.quad.display();
         this.scene.popMatrix();
 
     };

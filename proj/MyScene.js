@@ -41,6 +41,7 @@ class MyScene extends CGFscene {
         this.displayVehicle = false;
         this.displaySkybox = true;
         this.scaleFactorSB = 50;
+        this.selectedMaterial = 0;
     }
     checkKeys() {
         if (this.gui.isKeyPressed("KeyW")) {
@@ -67,7 +68,30 @@ class MyScene extends CGFscene {
         this.sphereMaterial.setShininess(10.0);
         this.sphereMaterial.loadTexture("images/earth.jpg");
         this.sphereMaterial.setTextureWrap("Repeat", "Clamp to edge");
+
+        this.galaxy_map = new CGFappearance(this);
+        this.galaxy_map.setAmbient(1.0, 1.0, 1.0, 1.0);
+        this.galaxy_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
+        this.galaxy_map.setSpecular(0.0, 0.0, 0.0, 1.0);
+        this.galaxy_map.setShininess(10.0);
+        this.galaxy_map.loadTexture('images/galaxy_map.png');
+        this.galaxy_map.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.mountain_map = new CGFappearance(this);
+        this.mountain_map.setAmbient(1.0, 1.0, 1.0, 1.0);
+        this.mountain_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
+        this.mountain_map.setSpecular(0.0, 0.0, 0.0, 1.0);
+        this.mountain_map.setShininess(10.0);
+        this.mountain_map.loadTexture('images/mountain_map.png');
+        this.mountain_map.setTextureWrap('REPEAT', 'REPEAT');
+
+
+        // Labels and ID's for object selection on MyInterface
+        this.materialIDs = {'Galaxy': 0, 'Mountaion': 1};
+        this.materials = [this.galaxy_map, this.mountain_map];
     }
+
+
     initColor(r, g, b) {
         r /= 255; // deixar de 0 a 1
         g /= 255; // deixar de 0 a 1
@@ -91,7 +115,6 @@ class MyScene extends CGFscene {
     }
     initLights() {
         this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
-
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
@@ -106,6 +129,7 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
@@ -144,6 +168,7 @@ class MyScene extends CGFscene {
         }
 
         if(this.displaySkybox){
+            this.materials[this.selectedMaterial].apply();
             this.pushMatrix();
             this.scale(this.scaleFactorSB, this.scaleFactorSB, this.scaleFactorSB);
             this.skybox.display();
