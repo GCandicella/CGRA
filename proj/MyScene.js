@@ -74,6 +74,7 @@ class MyScene extends CGFscene {
         this.galaxy_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
         this.galaxy_map.setSpecular(0.0, 0.0, 0.0, 1.0);
         this.galaxy_map.setShininess(10.0);
+        this.galaxy_map.setEmission(0.9, 0.9, 0.9, 1);
         this.galaxy_map.loadTexture('images/galaxy_map.png');
         this.galaxy_map.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -82,6 +83,7 @@ class MyScene extends CGFscene {
         this.mountain_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
         this.mountain_map.setSpecular(0.0, 0.0, 0.0, 1.0);
         this.mountain_map.setShininess(10.0);
+        this.mountain_map.setEmission(0.9, 0.9, 0.9, 1);
         this.mountain_map.loadTexture('images/mountain_map.png');
         this.mountain_map.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -174,8 +176,6 @@ class MyScene extends CGFscene {
             this.skybox.display();
             this.popMatrix();
         }
-
-        //this.quad.display();
 
         // ---- END Primitive drawing section
     }
