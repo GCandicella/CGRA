@@ -38,7 +38,7 @@ class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayMap = false;
         this.displayCylinder = false;
-        this.displayVehicle = false;
+        this.displayVehicle = true;
         this.displaySkybox = true;
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
@@ -60,6 +60,17 @@ class MyScene extends CGFscene {
             this.vehicle.reset();
         }
     }
+    texGenerator(image, wrap1 = 'REPEAT', wrap2 = wrap1){
+        let t = new CGFappearance(this);
+        t.setAmbient(1.0, 1.0, 1.0, 1.0);
+        t.setDiffuse(0.0, 0.0, 0.0, 1.0);
+        t.setSpecular(0.0, 0.0, 0.0, 1.0);
+        t.setShininess(10.0);
+        t.setEmission(0.9, 0.9, 0.9, 1);
+        t.loadTexture('images/'+ image);
+        t.setTextureWrap(wrap1, wrap2);
+        return t;
+    }
     initTextures(){
         this.sphereMaterial = new CGFappearance(this);
         this.sphereMaterial.setAmbient(0.1, 0.1, 0.1, 1);
@@ -69,28 +80,13 @@ class MyScene extends CGFscene {
         this.sphereMaterial.loadTexture("images/earth.jpg");
         this.sphereMaterial.setTextureWrap("Repeat", "Clamp to edge");
 
-        this.galaxy_map = new CGFappearance(this);
-        this.galaxy_map.setAmbient(1.0, 1.0, 1.0, 1.0);
-        this.galaxy_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
-        this.galaxy_map.setSpecular(0.0, 0.0, 0.0, 1.0);
-        this.galaxy_map.setShininess(10.0);
-        this.galaxy_map.setEmission(0.9, 0.9, 0.9, 1);
-        this.galaxy_map.loadTexture('images/galaxy_map.png');
-        this.galaxy_map.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.mountain_map = new CGFappearance(this);
-        this.mountain_map.setAmbient(1.0, 1.0, 1.0, 1.0);
-        this.mountain_map.setDiffuse(0.0, 0.0, 0.0, 1.0);
-        this.mountain_map.setSpecular(0.0, 0.0, 0.0, 1.0);
-        this.mountain_map.setShininess(10.0);
-        this.mountain_map.setEmission(0.9, 0.9, 0.9, 1);
-        this.mountain_map.loadTexture('images/mountain_map.png');
-        this.mountain_map.setTextureWrap('REPEAT', 'REPEAT');
-
+        this.galaxy_map = this.texGenerator('galaxy_map.png')
+        this.mountain_map = this.texGenerator('mountain_map.png');
+        this.desert_map = this.texGenerator('desert_map.png');
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Galaxy': 0, 'Mountaion': 1};
-        this.materials = [this.galaxy_map, this.mountain_map];
+        this.materialIDs = {'Galaxy': 0, 'Mountaion': 1, 'Desert': 2};
+        this.materials = [this.galaxy_map, this.mountain_map, this.desert_map];
     }
 
 
@@ -129,6 +125,7 @@ class MyScene extends CGFscene {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setEmission(0, 0, 0, 1);
         this.setShininess(10.0);
     }
 
@@ -170,10 +167,11 @@ class MyScene extends CGFscene {
         }
 
         if(this.displaySkybox){
-            this.materials[this.selectedMaterial].apply();
             this.pushMatrix();
+            this.materials[this.selectedMaterial].apply();
             this.scale(this.scaleFactorSB, this.scaleFactorSB, this.scaleFactorSB);
             this.skybox.display();
+            this.setDefaultAppearance();
             this.popMatrix();
         }
 
