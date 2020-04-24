@@ -2,6 +2,8 @@
 * MyPyramid
 * @constructor
 */
+const VelMax = 0.8;
+
 class MyVehicle extends CGFobject {
     constructor(scene, slices) {
         super(scene);
@@ -97,7 +99,10 @@ class MyVehicle extends CGFobject {
     }
 
     accelerate(val) {
-        this.velocidade += val;
+        if( (this.velocidade + val) >= VelMax || (this.velocidade + val) <= -VelMax)
+            return; // do nothing
+        else
+            this.velocidade += val; // proceed
     }
 
     update(){
