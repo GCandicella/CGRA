@@ -32,13 +32,14 @@ class MyScene extends CGFscene {
         this.skybox = new MyCubeMap(this);
         this.quad = new MySquare(this);
         this.vehicle = new MyVehicle(this, 5);
+        this.terrain = new MyTerrain(this, 80);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayMap = false;
         this.displayCylinder = false;
-        this.displayVehicle = true;
+        this.displayVehicle = false;
         this.displaySkybox = true;
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
@@ -174,6 +175,8 @@ class MyScene extends CGFscene {
             this.setDefaultAppearance();
             this.popMatrix();
         }
+
+        this.terrain.display();
 
         // ---- END Primitive drawing section
     }
