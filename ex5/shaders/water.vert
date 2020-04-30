@@ -16,7 +16,7 @@ void main() {
 	vec3 offset = vec3(0.0, 0.0, 0.0);
 	vTextureCoord = aTextureCoord;
 	vec4 watermap = texture2D(waterMap, vTextureCoord);
-	if(watermap.b < 0.5)
+	if(watermap.r > 0.5)
 		offset = aVertexNormal*0.05*watermap.b;
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);

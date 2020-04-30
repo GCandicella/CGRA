@@ -5,8 +5,6 @@ class MyTerrain extends CGFobject{
 		super(scene);
 		this.plane = new MyPlane(this.scene, nrDivs);
 		this.initMaterials();
-        this.terrainMap.bind(1);
-        this.terrainTex.bind(2);
 
         this.terrainShader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.terrainShader.setUniformsValues({waterMap: 1});
@@ -24,14 +22,12 @@ class MyTerrain extends CGFobject{
     }
 
 	display = function() {
-        this.scene.gl.texParameteri(
-            this.scene.gl.TEXTURE_2D,
-            this.scene.gl.TEXTURE_MAG_FILTER,
-            this.scene.gl.NEAREST
-        );
-
         this.scene.setActiveShader(this.terrainShader);
         this.scene.pushMatrix();
+
+        this.terrainMap.bind(1);
+        this.terrainTex.bind(2);
+
         this.scene.scale(20,20,20);
 		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.plane.display();
