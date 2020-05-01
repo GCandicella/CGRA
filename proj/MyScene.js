@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.cilindro = new MyCylinder(this, 50);
         this.skybox = new MyCubeMap(this);
         this.quad = new MySquare(this);
-        this.vehicle = new MyVehicle(this, 5);
+        this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this, 80);
         this.supplies = [
             new MySupply(this),
@@ -50,23 +50,39 @@ class MyScene extends CGFscene {
         this.displaySkybox = true;
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
+        this.actualsupply = 0;
     }
     checkKeys() {
-        if (this.gui.isKeyPressed("KeyW")) {
+        if (this.gui.isKeyPressed("KeyW"))
             this.vehicle.accelerate(0.1);
-        }
-        if (this.gui.isKeyPressed("KeyS")) {
+
+        if (this.gui.isKeyPressed("KeyS"))
             this.vehicle.accelerate(-0.1);
-        }
-        if (this.gui.isKeyPressed("KeyA")) {
+
+        if (this.gui.isKeyPressed("KeyA"))
             this.vehicle.turn(10);
-        }
-        if (this.gui.isKeyPressed("KeyD")) {
+
+        if (this.gui.isKeyPressed("KeyD"))
             this.vehicle.turn(-10);
-        }
-        if (this.gui.isKeyPressed("KeyR")) {
+
+        if (this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
+            this.actualsupply = 0;
+            for(let i = 0 ; i < 5 ; i++){
+                this.supplies[i].state = SupplyStates.INACTIVE;
+                this.supplies[i].y = 0;
+            }
+
         }
+
+        if (this.gui.isKeyPressed("KeyL")){
+            if(this.actualsupply < 5){
+                console.log(this.actualsupply);
+                this.supplies[this.actualsupply].drop(this.vehicle.posicao.x, this.vehicle.posicao.y, this.vehicle.posicao.z);
+                this.actualsupply++;
+            }
+        }
+
     }
     texGenerator(image, wrap1 = 'REPEAT', wrap2 = wrap1){
         let t = new CGFappearance(this);
@@ -141,6 +157,8 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.vehicle.update();
+        for(let i = 0 ; i < 5 ; i++)
+            this.supplies[i].update();
     }
 
     display() {
@@ -171,7 +189,7 @@ class MyScene extends CGFscene {
             this.cilindro.display();
         }
 
-        for (var i=0 ; i<5; i++)
+        for (let i=0 ; i<5; i++)
             this.supplies[i].display();
 
         if(this.displayVehicle){

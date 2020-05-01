@@ -114,14 +114,14 @@ class MyVehicle extends CGFobject {
         this.scene.translate(-0.2, -0.6, 1.1);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.4, 0.4, 0.4);
-        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds());
+        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.2, -0.6, 1.1);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.4, 0.4, 0.4);
-        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds());
+        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
     };
 
@@ -165,6 +165,5 @@ class MyVehicle extends CGFobject {
     update(){
         this.posicao.x += this.velocidade * Math.sin(this.angleY * Math.PI / 180);
         this.posicao.z += this.velocidade * Math.cos(this.angleY * Math.PI / 180);
-        this.helicesDisplay();
     }
 }
