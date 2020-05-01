@@ -18,63 +18,92 @@ class MyVehicle extends CGFobject {
         this.gondola_c.initBuffers();
         this.gondola_s.initBuffers();
 
+        this.initMaterials();
+
         this.angleY = 0;
         this.velocidade = 0;
         this.posicao = {x: 0, y: 0, z: 0};
     };
 
+    initMaterials() {
+        this.texture = new CGFappearance(this.scene);
+        this.texture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.texture.setDiffuse(0.4, 0.4, 0.4, 1);
+        this.texture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.texture.setShininess(10.0);
+        this.texture.loadTexture('images/blimp.jpg');
+        this.texture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.yellow = new CGFappearance(this.scene);
+        this.yellow.setAmbient(0.3, 0.3, 0.3, 1);
+        this.yellow.setDiffuse(0.4, 0.4, 0.4, 1);
+        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
+        this.yellow.setShininess(10.0);
+        this.yellow.loadTexture('images/yellow.jpg');
+        this.yellow.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.blue = new CGFappearance(this.scene);
+        this.blue.setAmbient(0.3, 0.3, 0.3, 1);
+        this.blue.setDiffuse(0.4, 0.4, 0.4, 1);
+        this.blue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.blue.setShininess(10.0);
+        this.blue.loadTexture('images/blue.jpg');
+        this.blue.setTextureWrap('REPEAT', 'REPEAT');
+    }
+
     corpoDisplay(){
         this.scene.pushMatrix();
         this.scene.scale(1, 2, 1);
+        this.texture.apply();
         this.corpo.display();
         this.scene.popMatrix();
     };
 
     gondolaDisplay() {
+        this.yellow.apply();
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.25, 1.2);
+        this.scene.translate(0, -0.25, 1);
         this.scene.scale(0.3, 0.3, 0.3);
         this.gondola_s.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.25, 1.2);
+        this.scene.translate(0, -0.25, 1);
         this.scene.scale(0.3, 0.7, 0.30);
         this.gondola_c.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.42, 1.2);
+        this.scene.translate(0, 0.42, 1);
         this.scene.scale(0.3, 0.3, 0.3);
         this.gondola_s.display();
         this.scene.popMatrix();
     };
+
     lemesDisplay() {
+        this.blue.apply();
+
+        // Static leme
         this.scene.pushMatrix();
-        this.scene.translate(0.8, -1.7, -0);
-        this.scene.scale(0.65, 0.50, 0.70);
+        this.scene.translate(0.4, -1.8, 0);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.leme.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.8, -1.7, -0);
-        this.scene.scale(0.65, 0.50, 0.70);
+        this.scene.translate(-0.4, -1.8, 0);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.leme.display();
+        this.scene.popMatrix();
+
+        // Rotate leme
+        this.scene.pushMatrix();
+        this.scene.translate(0, -1.8, -0.4);
         this.leme.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, -1.7, -0.85);
-        this.scene.rotate(this.angleY/50,0,1,0);
-        this.scene.rotate(Math.PI / 2, 0, 1, 0);
-        this.scene.scale(0.65, 0.50, 0.70);
-        this.leme.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(0, -1.7, 0.9);
-        this.scene.rotate(this.angleY/50,0,1,0);
-        this.scene.rotate(Math.PI / 2, 0, 1, 0);
-        this.scene.scale(0.65, 0.50, 0.70);
+        this.scene.translate(0, -1.8, 0.4);
         this.leme.display();
         this.scene.popMatrix();
     };

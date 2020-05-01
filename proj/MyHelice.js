@@ -33,7 +33,7 @@ class MyHelice extends CGFobject {
     display(spin){
         this.helice(spin);
         this.scene.pushMatrix();
-        this.scene.scale(0.4,0.3,0.9);
+        this.scene.scale(0.4,0.3,0.5);
         this.scene.translate(0,0,1);
         this.tubo.display();
         this.scene.popMatrix();

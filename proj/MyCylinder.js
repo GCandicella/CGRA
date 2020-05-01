@@ -1,68 +1,55 @@
+/**
+ * MyCylinder
+ * @constructor
+ */
 class MyCylinder extends CGFobject {
-    /**
-     * @method constructor
-     * @param  {CGFscene} scene - MyScene object
-     * @param  {integer} slices - number of slices around Y axis
-     */
     constructor(scene, slices, raio = 1) {
         super(scene);
         this.slices = slices;
         this.raio = raio;
         this.initBuffers();
     }
-
-    /**
-     * @method initBuffers
-     * Initializes the cylinder buffers
-     */
     initBuffers() {
-        this.ang = 2 * this.raio * Math.PI / this.slices;
         this.vertices = [];
         this.indices = [];
         this.normals = [];
-        this.texCoords = [];
+        this.texCoords=[];
 
         this.initLateral();
-        this.initBottomTop();
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
     initLateral(){
-        let angle = 0;
-        for (var i = 0; i <= this.slices; ++i) {
-            this.vertices.push(Math.cos(angle) * this.raio, 0, -Math.sin(angle) * this.raio);
-            this.vertices.push(Math.cos(angle) * this.raio, this.raio, -Math.sin(angle) * this.raio);
+        let ang = 0;
+        let alphaAng = 2 * this.raio * Math.PI/this.slices;
+        let textmap = 0;
+        let alphaTex = 1/this.slices;
 
-            this.indices.push(0+2*i, 2+2*i, 3+2*i);
-            this.indices.push(3+2*i, 1+2*i, 0+2*i);
+        for(var i = 0; i <= this.slices; i++){
+            this.vertices.push(Math.cos(ang) * this.raio, 0, -Math.sin(ang) * this.raio); // XZ plane face
+            this.vertices.push(Math.cos(ang) * this.raio, 1, -Math.sin(ang) * this.raio); // Y=1 plane face
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang), Math.cos(ang), 0, -Math.sin(ang));
+            this.texCoords.push(textmap, 1);
+            this.texCoords.push(textmap, 0);
 
-            this.normals.push(Math.cos(angle), 0, -Math.sin(angle));
-            this.normals.push(Math.cos(angle), 0, -Math.sin(angle));
 
-            let tex = (i + 1) / this.slices;
-            this.texCoords.push(tex, 1, tex, 0);
-
-            angle += this.ang;
+            if (i!==0){
+                this.indices.push((i*2), (i*2+1), (i*2-1));
+                this.indices.push((i*2), (2*i-1), (2*i-2));
+            }
+            ang+=alphaAng;
+            textmap+= alphaTex;
         }
     }
 
-    initBottomTop() {
-        var a = 2 * (this.slices + 1);
-        let angle = 0;
+    updateBuffers(complexity){
+        this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
-        for (var i=0; i <= this.slices; ++i) {
-            this.vertices.push(Math.cos(angle) * this.raio, 0, -Math.sin(angle) * this.raio);
-            this.vertices.push(Math.cos(angle) * this.raio, this.raio, -Math.sin(angle) * this.raio);
-
-            this.indices.push(a + 2*i, a + 2*i - 2    , a);
-            this.indices.push(a+1    , (a+1) + 2*i - 2, (a+1) + 2*i);
-
-            this.normals.push(0, -1, 0);
-            this.normals.push(0, 1 , 0);
-
-            angle += this.ang;
-        }
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
     }
 }
+

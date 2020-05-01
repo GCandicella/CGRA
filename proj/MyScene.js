@@ -33,6 +33,13 @@ class MyScene extends CGFscene {
         this.quad = new MySquare(this);
         this.vehicle = new MyVehicle(this, 5);
         this.terrain = new MyTerrain(this, 80);
+        this.supplies = [
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this),
+        ];
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -86,8 +93,8 @@ class MyScene extends CGFscene {
         this.desert_map = this.texGenerator('desert_map.png');
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Galaxy': 0, 'Mountaion': 1, 'Desert': 2};
-        this.materials = [this.galaxy_map, this.mountain_map, this.desert_map];
+        this.materialIDs = {'Mountaion': 0, 'Galaxy': 1, 'Desert': 2};
+        this.materials = [this.mountain_map, this.galaxy_map, this.desert_map];
     }
 
 
@@ -157,11 +164,15 @@ class MyScene extends CGFscene {
         if (this.displaySphere){
             this.sphereMaterial.apply();
             this.sphere.display();
+            this.setDefaultAppearance();
         }
 
         if(this.displayCylinder){
             this.cilindro.display();
         }
+
+        for (var i=0 ; i<5; i++)
+            this.supplies[i].display();
 
         if(this.displayVehicle){
             this.pushMatrix();
