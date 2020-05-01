@@ -39,7 +39,7 @@ class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayMap = false;
         this.displayCylinder = false;
-        this.displayVehicle = false;
+        this.displayVehicle = true;
         this.displaySkybox = true;
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
@@ -120,7 +120,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(1.6, 1.6, 350, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -164,7 +164,10 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayVehicle){
+            this.pushMatrix();
+            this.scale(this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04);
             this.vehicle.display();
+            this.popMatrix();
         }
 
         if(this.displaySkybox){
@@ -176,7 +179,10 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
 
-        this.terrain.display();
+        this.pushMatrix();
+        this.translate(0,-0.5 * this.scaleFactorSB + 0.1,0);
+        this.terrain.display(this.scaleFactorSB);
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }

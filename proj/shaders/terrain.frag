@@ -4,13 +4,13 @@ precision highp float;
 
 varying vec2 vTextureCoord;
 
-uniform sampler2D waterMap;
-uniform sampler2D waterTex;
+uniform sampler2D terrainMap;
+uniform sampler2D terrainTex;
 
 void main() {
 
-	vec4 color = texture2D(waterTex, vTextureCoord);   //move the color
-	vec4 map   = texture2D(waterMap, vec2(0.0,0.1) + vTextureCoord);
+	vec4 color = texture2D(terrainTex, vTextureCoord);   //move the color
+	vec4 map   = texture2D(terrainMap, vec2(0.0,0.1) + vTextureCoord);
 
 	map *= 0.2; // mais suave
 

@@ -7,8 +7,8 @@ class MyTerrain extends CGFobject{
 		this.initMaterials();
 
         this.terrainShader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
-        this.terrainShader.setUniformsValues({waterMap: 1});
-        this.terrainShader.setUniformsValues({waterTex: 2});
+        this.terrainShader.setUniformsValues({terrainMap: 1});
+        this.terrainShader.setUniformsValues({terrainTex: 2});
 	}
 
     initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
@@ -21,14 +21,14 @@ class MyTerrain extends CGFobject{
         this.terrainTex = this.initTexture("images/terrain.jpg");
     }
 
-	display = function() {
+	display = function(factor) {
         this.scene.setActiveShader(this.terrainShader);
         this.scene.pushMatrix();
 
         this.terrainMap.bind(1);
         this.terrainTex.bind(2);
 
-        this.scene.scale(20,20,20);
+        this.scene.scale(factor,factor,factor);
 		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.plane.display();
         this.scene.popMatrix();
