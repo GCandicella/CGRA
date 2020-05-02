@@ -3,6 +3,7 @@
 * @constructor
 */
 const VelMax = 0.8;
+var AutoPilot = 0;
 
 class MyVehicle extends CGFobject {
     constructor(scene) {
@@ -23,6 +24,7 @@ class MyVehicle extends CGFobject {
         this.angleY = 0;
         this.velocidade = 0;
         this.posicao = {x: 0, y: 0, z: 0};
+        this.center = {x: 0, z: 0}; // Usado apenas em AutoPilot
     };
 
     initMaterials() {
@@ -147,6 +149,7 @@ class MyVehicle extends CGFobject {
         this.posicao = {x:0, y:0, z:0};
         this.angleY = 0;
         this.velocidade = 0;
+        AutoPilot = AutoPilot == 1 ? 0 : 0;
     }
 
     turn(val) {
@@ -165,5 +168,34 @@ class MyVehicle extends CGFobject {
     update(){
         this.posicao.x += this.velocidade * Math.sin(this.angleY * Math.PI / 180);
         this.posicao.z += this.velocidade * Math.cos(this.angleY * Math.PI / 180);
+    }
+
+    switchPilot(){
+        AutoPilot = AutoPilot == 1 ? 0 : 1;
+    }
+
+    getPilotStatus(){
+        return AutoPilot;
+    }
+
+    calculateCenter(){
+        // Inicializar:
+            var radius = 5;
+            var vector = {x: 0, z: 0};
+
+            vector.x = MATH.cos(this.angleY);
+            vector.z = MATH.sin(this.anglyY);
+
+        // Determinar vetor perpendicular e normalizar (tornar num vetor unitário)
+            var aux = vector.x;
+            vector.z = vector.x;
+            vector.x = aux;
+            aux = Math.sqrt( Math.pow(vector.z, 2) + Math.pow(vector.x, 2) );
+            vector.z = vector.z / aux;
+            vector.x = vector.x / aux;
+
+        // Calcular centro
+            this.center.x = this.posicao.x + radius * vector.x;
+            this.center.z = this.posicao.z + radius * vector.z;
     }
 }
