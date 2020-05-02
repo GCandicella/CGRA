@@ -51,6 +51,8 @@ class MyScene extends CGFscene {
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
         this.actualsupply = 0;
+        this.timelastdrop = 0;
+        this.deltalastdrop = 0;
     }
     checkKeys() {
         if (this.gui.isKeyPressed("KeyW"))
@@ -70,16 +72,16 @@ class MyScene extends CGFscene {
             this.actualsupply = 0;
             for(let i = 0 ; i < 5 ; i++){
                 this.supplies[i].state = SupplyStates.INACTIVE;
-                this.supplies[i].y = 0;
+                this.supplies[i].posicao.y = 0;
             }
 
         }
 
         if (this.gui.isKeyPressed("KeyL")){
-            if(this.actualsupply < 5){
-                console.log(this.actualsupply);
+            if(this.actualsupply < 5 && this.deltalastdrop > 1000){
                 this.supplies[this.actualsupply].drop(this.vehicle.posicao.x, this.vehicle.posicao.y, this.vehicle.posicao.z);
                 this.actualsupply++;
+                this.deltalastdrop = 0;
             }
         }
 
@@ -159,6 +161,8 @@ class MyScene extends CGFscene {
         this.vehicle.update();
         for(let i = 0 ; i < 5 ; i++)
             this.supplies[i].update();
+        this.deltalastdrop += t - this.timelastdrop;
+        this.timelastdrop = t;
     }
 
     display() {
