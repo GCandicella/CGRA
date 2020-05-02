@@ -55,17 +55,27 @@ class MyScene extends CGFscene {
         this.deltalastdrop = 0;
     }
     checkKeys() {
-        if (this.gui.isKeyPressed("KeyW"))
-            this.vehicle.accelerate(0.1);
+        if(this.vehicle.getPilotStatus() == 0){
+            // AutoPilot deactivated
+            if (this.gui.isKeyPressed("KeyW"))
+                this.vehicle.accelerate(0.1);
 
-        if (this.gui.isKeyPressed("KeyS"))
-            this.vehicle.accelerate(-0.1);
+            if (this.gui.isKeyPressed("KeyS"))
+                this.vehicle.accelerate(-0.1);
 
-        if (this.gui.isKeyPressed("KeyA"))
-            this.vehicle.turn(10);
+            if (this.gui.isKeyPressed("KeyA"))
+                this.vehicle.turn(10);
 
-        if (this.gui.isKeyPressed("KeyD"))
+            if (this.gui.isKeyPressed("KeyD"))
+                this.vehicle.turn(-10);
+        }
+        else{
+            // AutoPilot activated
             this.vehicle.turn(-10);
+        }
+
+        if (this.gui.isKeyPressed("KeyP"))
+            this.vehicle.switchPilot();
 
         if (this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
