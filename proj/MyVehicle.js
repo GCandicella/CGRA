@@ -8,14 +8,14 @@ var AutoPilot = 0;
 class MyVehicle extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.corpo = new MySphere(scene, 20, 30);
+        this.balao = new MySphere(scene, 20, 30);
         this.gondola_s = new MySphere(scene, 20, 30);
         this.gondola_c = new MyCylinder(scene, 20, 1);
         this.helice = new MyHelice(scene);
         this.leme = new MyLeme(scene);
 
         this.initBuffers();
-        this.corpo.initBuffers();
+        this.balao.initBuffers();
         this.gondola_c.initBuffers();
         this.gondola_s.initBuffers();
 
@@ -53,30 +53,31 @@ class MyVehicle extends CGFobject {
         this.blue.setTextureWrap('REPEAT', 'REPEAT');
     }
 
-    corpoDisplay(){
+    balaoDisplay(){
         this.scene.pushMatrix();
-        this.scene.scale(1, 2, 1);
+        this.scene.scale(1, 1, 2);
         this.texture.apply();
-        this.corpo.display();
+        this.balao.display();
         this.scene.popMatrix();
     };
 
     gondolaDisplay() {
         this.yellow.apply();
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.25, 1);
+        this.scene.translate(0, -1, 0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.gondola_s.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.25, 1);
-        this.scene.scale(0.3, 0.7, 0.30);
+        this.scene.scale(0.3, 0.3, 1);
+        this.scene.translate(0, -3.3, -0.5);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.gondola_c.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.42, 1);
+        this.scene.translate(0, -1, -0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.gondola_s.display();
         this.scene.popMatrix();
@@ -87,42 +88,45 @@ class MyVehicle extends CGFobject {
 
         // Static leme
         this.scene.pushMatrix();
-        this.scene.translate(0.4, -1.8, 0);
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.scene.translate(0, 0.4, -1.8);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.leme.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.4, -1.8, 0);
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.scene.translate(0, -0.4, -1.8);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.leme.display();
         this.scene.popMatrix();
 
         // Rotate leme
         this.scene.pushMatrix();
-        this.scene.translate(0, -1.8, -0.4);
+        this.scene.translate(0.4, 0, -1.8);
+        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.leme.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, -1.8, 0.4);
+        this.scene.translate(-0.4, 0, -1.8);
+        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.leme.display();
         this.scene.popMatrix();
+
     };
 
     helicesDisplay(){
         let time = new Date();
         this.scene.pushMatrix();
-        this.scene.translate(-0.2, -0.6, 1.1);
-        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-        this.scene.scale(0.4, 0.4, 0.4);
+        this.scene.translate(-0.2, -1.1, -1.1);
+        this.scene.scale(0.4, 0.4, 0.3);
         this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.2, -0.6, 1.1);
-        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-        this.scene.scale(0.4, 0.4, 0.4);
+        this.scene.translate(0.2, -1.1, -1.1);
+        this.scene.scale(0.4, 0.4, 0.3);
         this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
     };
@@ -132,16 +136,12 @@ class MyVehicle extends CGFobject {
 
         this.scene.translate(this.posicao.x, this.posicao.y, this.posicao.z);
         this.scene.rotate(this.angleY * Math.PI / 180, 0, 1, 0);
-
-        this.scene.translate(0, 0, -0.5); //pos inicial
-        this.scene.rotate(90 * Math.PI / 180, 1, 0, 0);
-
-        this.corpoDisplay();
+        
+        this.balaoDisplay();
         this.gondolaDisplay()
         this.lemesDisplay();
         this.helicesDisplay();
 
-        super.display();
         this.scene.popMatrix();
     }
 
