@@ -184,7 +184,7 @@ class MyVehicle extends CGFobject {
             var vector = {x: 0, z: 0};
 
             vector.x = MATH.cos(this.angleY);
-            vector.z = MATH.sin(this.anglyY);
+            vector.z = MATH.sin(this.angleY);
 
         // Determinar vetor perpendicular e normalizar (tornar num vetor unitário)
             var aux = vector.x;
