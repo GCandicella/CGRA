@@ -16,15 +16,15 @@ class MySupply extends CGFobject {
         this.box = new MyUniteCubeQuad(this.scene);
         this.state = SupplyStates.INACTIVE;
         this.initMaterials();
-        this.time_inicio = new Date();
+        this.tempodequeda = 0;
     }
 
     drop(dropx, dropy, dropz){
-        console.log(dropx + " | " + dropy + " | " + dropz);
         this.state = SupplyStates.FALLING;
         this.posicao.x = dropx;
         this.posicao.y = dropy;
         this.posicao.z = dropz;
+        this.time_inicio = new Date();
     }
 
     initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
@@ -42,13 +42,16 @@ class MySupply extends CGFobject {
         this.cratematerial = this.initTexture("images/crate/crate.jpg");
     }
 
-    update() {
-        let time_agora = new Date();
+    update(tempoPassado) {
         if (this.state === SupplyStates.FALLING){
-            if((time_agora - this.time_inicio.getTime()) >= 3){
-
+            this.tempodequeda += tempoPassado;
+            if(this.tempodequeda >= 3){
+                this.state = SupplyStates.LANDED;
             }
-            this.posicao.y = -1;
+            this.posicao.y -= this.tempodequeda/3;
+        }
+        if(this.state === SupplyStates.LANDED){
+            this.posicao.y = -20;
         }
     }
 

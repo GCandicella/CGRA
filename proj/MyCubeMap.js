@@ -74,7 +74,7 @@ class MyCubeMap extends CGFobject {
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.scene.rotate(-Math.PI, 0, 1, 0);
-        this.quad.updateTexCoords([0, 0.335, 0, 0.663, 0.25, 0.664, 0.25, 0.335  ]);
+        this.quad.updateTexCoords([0.01, 0.335, 0.01, 0.663, 0.25, 0.664, 0.25, 0.335  ]);
         this.quad.display();
         this.scene.popMatrix();
 

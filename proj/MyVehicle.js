@@ -127,11 +127,13 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     };
 
-    display(){
+    display(scaleFactor){
         this.scene.pushMatrix();
+
 
         this.scene.translate(this.posicao.x, this.posicao.y, this.posicao.z);
         this.scene.rotate(this.angleY * Math.PI / 180, 0, 1, 0);
+        this.scene.scale(scaleFactor/50,scaleFactor/50,scaleFactor/50);
         
         this.balaoDisplay();
         this.gondolaDisplay();

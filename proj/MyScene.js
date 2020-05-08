@@ -168,11 +168,11 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.deltalastdrop += t - this.previousT;
-        this.previousT = t;
         this.checkKeys();
         this.vehicle.update();
         for(let i = 0 ; i < 5 ; i++)
-            this.supplies[i].update();
+            this.supplies[i].update( (t-this.previousT) / 1000);
+        this.previousT = t;
     }
 
     display() {
@@ -191,6 +191,7 @@ class MyScene extends CGFscene {
             this.axis.display();
 
         this.setDefaultAppearance();
+        this.pushMatrix();
 
         // ---- BEGIN Primitive drawing section
         if (this.displaySphere){
@@ -208,8 +209,7 @@ class MyScene extends CGFscene {
 
         if(this.displayVehicle){
             this.pushMatrix();
-            //this.scale(this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04);
-            this.vehicle.display();
+            this.vehicle.display(this.scaleFactorSB);
             this.popMatrix();
         }
 
@@ -225,6 +225,8 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(0,-0.5 * this.scaleFactorSB + 0.1,0);
         this.terrain.display(this.scaleFactorSB);
+        this.popMatrix();
+
         this.popMatrix();
 
         // ---- END Primitive drawing section
