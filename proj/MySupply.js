@@ -16,9 +16,11 @@ class MySupply extends CGFobject {
         this.box = new MyUniteCubeQuad(this.scene);
         this.state = SupplyStates.INACTIVE;
         this.initMaterials();
+        this.time_inicio = new Date();
     }
 
     drop(dropx, dropy, dropz){
+        console.log(dropx + " | " + dropy + " | " + dropz);
         this.state = SupplyStates.FALLING;
         this.posicao.x = dropx;
         this.posicao.y = dropy;
@@ -41,8 +43,12 @@ class MySupply extends CGFobject {
     }
 
     update() {
+        let time_agora = new Date();
         if (this.state === SupplyStates.FALLING){
-            this.posicao.y -= 1;
+            if((time_agora - this.time_inicio.getTime()) >= 3){
+
+            }
+            this.posicao.y = -1;
         }
     }
 

@@ -208,7 +208,7 @@ class MyScene extends CGFscene {
 
         if(this.displayVehicle){
             this.pushMatrix();
-            this.scale(this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04);
+            //this.scale(this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04, this.scaleFactorSB * 0.04);
             this.vehicle.display();
             this.popMatrix();
         }
