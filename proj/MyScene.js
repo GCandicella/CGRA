@@ -51,7 +51,7 @@ class MyScene extends CGFscene {
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
         this.actualsupply = 0;
-        this.timelastdrop = 0;
+        this.previousT = 0;
         this.deltalastdrop = 0;
     }
     checkKeys() {
@@ -116,7 +116,7 @@ class MyScene extends CGFscene {
         this.sphereMaterial.loadTexture("images/earth.jpg");
         this.sphereMaterial.setTextureWrap("Repeat", "Clamp to edge");
 
-        this.galaxy_map = this.texGenerator('galaxy_map.png')
+        this.galaxy_map = this.texGenerator('galaxy_map.png');
         this.mountain_map = this.texGenerator('mountain_map.png');
         this.desert_map = this.texGenerator('desert_map.png');
 
@@ -167,12 +167,12 @@ class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+        this.deltalastdrop += t - this.previousT;
+        this.previousT = t;
         this.checkKeys();
         this.vehicle.update();
         for(let i = 0 ; i < 5 ; i++)
             this.supplies[i].update();
-        this.deltalastdrop += t - this.timelastdrop;
-        this.timelastdrop = t;
     }
 
     display() {
