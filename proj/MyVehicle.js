@@ -149,20 +149,20 @@ class MyVehicle extends CGFobject {
         this.posicao = {x:0, y:0, z:0};
         this.angleY = 0;
         this.velocidade = 0;
-        AutoPilot = AutoPilot == 1 ? 0 : 0;
+        AutoPilot = 0;
     }
 
     turn(val) {
         this.angleY += val;
-        if(this.angleY == 360) this.angleY = 0;
-        if(this.angleY == -360) this.angleY = 0;
     }
 
     accelerate(val) {
+        if(this.velocidade + val < 0) return;
         if( (this.velocidade + val) >= VelMax || (this.velocidade + val) <= -VelMax)
             return; // do nothing
         else
             this.velocidade += val; // proceed
+
     }
 
     update(){
