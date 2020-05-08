@@ -121,13 +121,13 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(-0.2, -1.1, -1);
         this.scene.scale(0.4, 0.4, 0.3);
-        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
+        this.helice.display(this.velocidade + this.velocidade*time.getTime()/50);
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.2, -1.1, -1);
         this.scene.scale(0.4, 0.4, 0.3);
-        this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
+        this.helice.display(this.velocidade + this.velocidade*time.getTime()/50);
         this.scene.popMatrix();
     };
 
@@ -138,7 +138,7 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.angleY * Math.PI / 180, 0, 1, 0);
         
         this.balaoDisplay();
-        this.gondolaDisplay()
+        this.gondolaDisplay();
         this.lemesDisplay();
         this.helicesDisplay();
 
@@ -157,12 +157,14 @@ class MyVehicle extends CGFobject {
     }
 
     accelerate(val) {
-        if(this.velocidade + val < 0) return;
-        if( (this.velocidade + val) >= VelMax || (this.velocidade + val) <= -VelMax)
-            return; // do nothing
+        if( (this.velocidade + val) < 0){
+            this.velocidade = 0;
+        }
+        else if( (this.velocidade + val) >= VelMax){
+            this.velocidade = VelMax;
+        }
         else
             this.velocidade += val; // proceed
-
     }
 
     update(){
