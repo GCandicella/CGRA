@@ -119,13 +119,13 @@ class MyVehicle extends CGFobject {
     helicesDisplay(){
         let time = new Date();
         this.scene.pushMatrix();
-        this.scene.translate(-0.2, -1.1, -1.1);
+        this.scene.translate(-0.2, -1.1, -1);
         this.scene.scale(0.4, 0.4, 0.3);
         this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.2, -1.1, -1.1);
+        this.scene.translate(0.2, -1.1, -1);
         this.scene.scale(0.4, 0.4, 0.3);
         this.helice.display(this.velocidade + this.velocidade*time.getMilliseconds()/50);
         this.scene.popMatrix();
