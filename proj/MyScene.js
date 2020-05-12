@@ -71,7 +71,9 @@ class MyScene extends CGFscene {
         }
         else{
             // AutoPilot activated
+            this.vehicle.calculateCenter();
             this.vehicle.turn(-10);
+            this.vehicle.autoPilotUpdate();
         }
 
         if (this.gui.isKeyPressed("KeyP"))
@@ -82,10 +84,11 @@ class MyScene extends CGFscene {
             this.actualsupply = 0;
             for(let i = 0 ; i < 5 ; i++){
                 this.supplies[i].state = SupplyStates.INACTIVE;
-                this.supplies[i].posicao.y = 0;
+                this.supplies[i].y = 0;
             }
 
         }
+
 
         if (this.gui.isKeyPressed("KeyL")){
             if(this.actualsupply < 5 && this.deltalastdrop > 1000){
