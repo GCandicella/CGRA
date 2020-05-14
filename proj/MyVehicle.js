@@ -19,7 +19,7 @@ class MyVehicle extends CGFobject {
 
         this.angleY = 0;
         this.velocidade = 0;
-        this.posicao = {x: 5, y: 0, z: 0};
+        this.posicao = {x: 0, y: 0, z: 0};
 
         this.center = {x: 0, y: 0, z: 0};       // Usado apenas em AutoPilot
         this.orientation = 0;                   // Orientação
