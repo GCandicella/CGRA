@@ -71,13 +71,13 @@ class MyScene extends CGFscene {
         }
         else{
             // AutoPilot activated
-            this.vehicle.calculateCenter();
-            this.vehicle.turn(-10);
             this.vehicle.autoPilotUpdate();
         }
 
-        if (this.gui.isKeyPressed("KeyP"))
+        if (this.gui.isKeyPressed("KeyP")){
             this.vehicle.switchPilot();
+            this.vehicle.calculateCenter();
+        }
 
         if (this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
@@ -172,7 +172,7 @@ class MyScene extends CGFscene {
     update(t){
         this.deltalastdrop += t - this.previousT;
         this.checkKeys();
-        this.vehicle.update();
+        this.vehicle.update(t);
         for(let i = 0 ; i < 5 ; i++)
             this.supplies[i].update( (t-this.previousT) / 1000);
         this.previousT = t;

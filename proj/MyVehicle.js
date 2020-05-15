@@ -21,8 +21,18 @@ class MyVehicle extends CGFobject {
         this.velocidade = 0;
         this.posicao = {x: 0, y: 0, z: 0};
 
-        this.center = {x: 0, y: 0, z: 0};       // Usado apenas em AutoPilot
-        this.orientation = 0;                   // Orientação
+        // Initial State of auto pilot (and essential variables)
+        this.pilotAngle = 0;                    // Angle related to X
+        this.center = {x: 0, y: 0, z: 0};       // Used only in AutoPilot mode
+        this.orientation = 0;                   // Orientation
+        this.radius = 5;                        // Fixed radius
+
+        // Auto Pilot variables
+        this.animationTime = 5;
+        this.angularSpeed = 360 / this.animationTime;
+        this.deltaTime;
+        this.old_t;
+        this.new_t;
     };
 
     initMaterials() {
@@ -167,9 +177,12 @@ class MyVehicle extends CGFobject {
             this.velocidade += val; // proceed
     }
 
-    update(){
+    update(t){
         this.posicao.x += this.velocidade * Math.sin(this.angleY * Math.PI / 180);
         this.posicao.z += this.velocidade * Math.cos(this.angleY * Math.PI / 180);
+        this.old_t = this.new_t;
+        this.new_t = t;
+        this.deltaTime = (this.new_t - this.old_t) / 1000;
     }
 
     switchPilot(){
@@ -182,28 +195,35 @@ class MyVehicle extends CGFobject {
 
     calculateCenter(){
         // Inicializar:
-        var radius = 5;
+        this.pilotAngle = this.angleY - 90;
+        var temp = this.angleY + 90;
         var vector = {x: 0, z: 0};
 
-        vector.x = Math.cos(this.angleY);
-        vector.z = Math.sin(this.anglyY);
+        vector.x = Math.sin(temp * Math.PI / 180);
+        vector.z = Math.cos(temp * Math.PI / 180);
 
-        // Determinar vetor perpendicular e normalizar (tornar num vetor unitário)
-        var aux = vector.z;
-        vector.z = -vector.x;
-        vector.x = aux;
-        aux = Math.sqrt( Math.pow(vector.z, 2) + Math.pow(vector.x, 2) );
-        vector.z = vector.z / aux;
-        vector.x = vector.x / aux;
+        /* Determinar vetor perpendicular e normalizar (tornar num vetor unitário)
+            aux = Math.sqrt( Math.pow(vector.z, 2) + Math.pow(vector.x, 2) );
+            vector.z = vector.z / aux;
+            vector.x = vector.x / aux;*/
 
         // Calcular centro
-        this.center.x = this.posicao.x + radius * vector.x;
-        this.center.z = this.posicao.z + radius * vector.z;
+        this.center.x = this.posicao.x + this.radius * vector.x;
+        this.center.z = this.posicao.z + this.radius * vector.z;
     }
 
     autoPilotUpdate(){
-        var radius = 5;
-        this.posicao.x = this.center.x + radius * Math.cos(this.angleY * Math.PI / 180);
-        this.posicao.z = this.center.z + radius * Math.sin(this.angleY * Math.PI / 180);
+        this.posicao.x = this.center.x;
+        this.posicao.z = this.center.z;
+        var deltaAngle = this.deltaTime * this.angularSpeed;
+        this.pilotAngle += deltaAngle;
+
+        var vector = {x: 0, z: 0};
+        vector.x = Math.sin(this.pilotAngle * Math.PI / 180);
+        vector.z = Math.cos(this.pilotAngle * Math.PI / 180);
+
+        this.posicao.x = this.center.x + vector.x * this.radius;
+        this.posicao.z = this.center.z + vector.z * this.radius;
+        this.angleY = this.pilotAngle + 90;
     }
 }
