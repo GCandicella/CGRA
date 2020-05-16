@@ -210,18 +210,18 @@ class MyScene extends CGFscene {
         for (let i=0 ; i<5; i++)
             this.supplies[i].display();
 
-        if(this.displayVehicle){
-            this.pushMatrix();
-            this.vehicle.display(this.scaleFactorSB);
-            this.popMatrix();
-        }
-
         if(this.displaySkybox){
             this.pushMatrix();
             this.materials[this.selectedMaterial].apply();
             this.scale(this.scaleFactorSB, this.scaleFactorSB, this.scaleFactorSB);
             this.skybox.display();
             this.setDefaultAppearance();
+            this.popMatrix();
+        }
+
+        if(this.displayVehicle){
+            this.pushMatrix();
+            this.vehicle.display(this.scaleFactorSB);
             this.popMatrix();
         }
 

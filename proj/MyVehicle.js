@@ -9,17 +9,25 @@ class MyVehicle extends CGFobject {
         this.gondola_c = new MyCylinder(scene, 20, 1);
         this.helice = new MyHelice(scene);
         this.leme = new MyLeme(scene);
+        this.flag = new MyPlane(scene, 20);
 
         this.initBuffers();
         this.balao.initBuffers();
         this.gondola_c.initBuffers();
         this.gondola_s.initBuffers();
 
+
         this.initMaterials();
 
         this.angleY = 0;
         this.velocidade = 0;
         this.posicao = {x: 0, y: 0, z: 0};
+
+        // Flag Shader
+        this.flagshader = new CGFshader(this.scene.gl, 'shaders/flag.vert', 'shaders/flag.frag');
+        this.flagshader.setUniformsValues({timeFactor: 0});
+        this.flagshader.setUniformsValues({uSampler1: 1})
+        this.flagshader.setUniformsValues({velocidade: this.velocidade});
 
         // Initial State of auto pilot (and essential variables)
         this.pilotAngle = 0;                    // Angle related to X
@@ -59,6 +67,8 @@ class MyVehicle extends CGFobject {
         this.blue.setShininess(10.0);
         this.blue.loadTexture('images/blue.jpg');
         this.blue.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.flagTex = new CGFtexture(this.scene, 'images/flag.png');
     }
 
     balaoDisplay(){
@@ -139,6 +149,28 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     };
 
+    flagDisplay(){
+
+        this.scene.setActiveShader(this.flagshader);
+        this.scene.pushMatrix();
+        this.flagTex.bind(1);
+        this.scene.translate(0, 0, -4)
+        this.scene.scale(1, 1, 1.5);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.flag.display();
+        this.scene.popMatrix();
+
+        this.scene.setActiveShader(this.flagshader);
+        this.scene.pushMatrix();
+        this.flagTex.bind(1);
+        this.scene.translate(0, 0, -4)
+        this.scene.scale(1, 1, 1.5);
+        this.scene.rotate(-Math.PI/2, 0, 1, 0);
+        this.flag.display();
+        this.scene.popMatrix();
+
+    }
+
     display(scaleFactor){
         this.scene.pushMatrix();
 
@@ -151,6 +183,7 @@ class MyVehicle extends CGFobject {
         this.gondolaDisplay();
         this.lemesDisplay();
         this.helicesDisplay();
+        this.flagDisplay();
 
         this.scene.popMatrix();
     }
@@ -183,6 +216,8 @@ class MyVehicle extends CGFobject {
         this.old_t = this.new_t;
         this.new_t = t;
         this.deltaTime = (this.new_t - this.old_t) / 1000;
+        this.flagshader.setUniformsValues({timeFactor: t / 100 % 1000});
+        this.flagshader.setUniformsValues({velocidade: this.velocidade});
     }
 
     switchPilot(){
