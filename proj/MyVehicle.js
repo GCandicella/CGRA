@@ -10,6 +10,7 @@ class MyVehicle extends CGFobject {
         this.helice = new MyHelice(scene);
         this.leme = new MyLeme(scene);
         this.flag = new MyPlane(scene, 20);
+        this.caboflag = new MyCylinder(scene, 20, 1);
 
         this.initBuffers();
         this.balao.initBuffers();
@@ -151,6 +152,23 @@ class MyVehicle extends CGFobject {
 
     flagDisplay(){
 
+        // Cabos
+        this.yellow.apply();
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, -1.5);
+        this.scene.rotate(-Math.PI/2.3, 1, 0, 0);
+        this.scene.scale(.02, 1.8, .02);
+        this.caboflag.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, -1.5);
+        this.scene.rotate(Math.PI+Math.PI/2.3, 1, 0, 0);
+        this.scene.scale(.02, 1.8, .02);
+        this.caboflag.display();
+        this.scene.popMatrix();
+
+        // Flag Frente
         this.scene.setActiveShader(this.flagshader);
         this.scene.pushMatrix();
         this.flagTex.bind(1);
@@ -160,6 +178,7 @@ class MyVehicle extends CGFobject {
         this.flag.display();
         this.scene.popMatrix();
 
+        // Flag Trás
         this.scene.setActiveShader(this.flagshader);
         this.scene.pushMatrix();
         this.flagTex.bind(1);
