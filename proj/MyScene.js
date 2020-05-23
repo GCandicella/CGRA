@@ -40,6 +40,7 @@ class MyScene extends CGFscene {
             new MySupply(this),
             new MySupply(this),
         ];
+        this.billboard = new MyBillboard(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -81,6 +82,7 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
+            this.billboard.reset();
             this.actualsupply = 0;
             for(let i = 0 ; i < 5 ; i++){
                 this.supplies[i].state = SupplyStates.INACTIVE;
@@ -95,6 +97,7 @@ class MyScene extends CGFscene {
                 this.supplies[this.actualsupply].drop(this.vehicle.posicao.x, this.vehicle.posicao.y, this.vehicle.posicao.z);
                 this.actualsupply++;
                 this.deltalastdrop = 0;
+                this.billboard.update(this.actualsupply);
             }
         }
 
@@ -210,6 +213,8 @@ class MyScene extends CGFscene {
         for (let i=0 ; i<5; i++)
             this.supplies[i].display();
 
+
+
         if(this.displaySkybox){
             this.pushMatrix();
             this.materials[this.selectedMaterial].apply();
@@ -229,6 +234,8 @@ class MyScene extends CGFscene {
         this.translate(0,-0.5 * this.scaleFactorSB + 0.1,0);
         this.terrain.display(this.scaleFactorSB);
         this.popMatrix();
+
+        this.billboard.display();
 
         this.popMatrix();
 

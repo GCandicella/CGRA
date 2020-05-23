@@ -177,6 +177,7 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.flag.display();
         this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
 
         // Flag Trás
         this.scene.setActiveShader(this.flagshader);
@@ -187,6 +188,7 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.flag.display();
         this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
 
     }
 
