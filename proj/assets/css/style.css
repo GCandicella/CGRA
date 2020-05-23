@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat";
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+  position: absolute;
+  display: block;
+  height: 100vh;
+}
+
+#main {
+  z-index: 1;
+  position: absolute;
+}
+
+#menu {
+  color: white;
+  padding: 1.5em;
+}
+
+.menu-item {
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #fff;
+  line-height: 2.2em;
+  text-align: center;
+  background: #bf0000;
+  box-shadow: #444444 2px 2px 5px;
+  transition: 0.4s;
+}
+
+.menu-item:hover {
+  background-color: #a30000;
+  transition: 0.4s;
+}
+
+.menu-item a {
+  color: white;
+}
+
+.menu-item a:hover {
+  color: white;
+}
+
+.hamburger {
+  width: 100px;
+  height: 100px;
+  background: #bf0000;
+  box-shadow: 0 0 15px #032f41;
+  cursor: pointer;
+  position: relative;
+  border-radius: 5px;
+}
+
+.hamburger > div {
+  position: absolute;
+  height: 10px;
+  background: #fff;
+  transition: width 0.3s ease;
+  border-radius: 5px;
+}
+
+.first {
+  width: 55px;
+  top: 25px;
+  left: 20px;
+}
+
+.second {
+  width: 40px;
+  top: 45px;
+  left: 20px;
+}
+
+.third {
+  width: 50px;
+  top: 65px;
+  left: 20px;
+}
+
+.hamburger:hover {
+  background-color: #af0000;
+}
+
+.hamburger:hover div {
+  width: 60px;
+  transition: width 0.3s ease;
+}
+
+.modal-fullscreen .modal-content {
+  height: 100vh;
+  color: white;
+  background: transparent;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.modal-lg {
+  max-width: 100% !important;
+  top: 30%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*# sourceMappingURL=style.css.map */
