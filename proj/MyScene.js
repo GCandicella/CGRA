@@ -44,11 +44,10 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displaySphere = false;
-        this.displayMap = false;
-        this.displayCylinder = false;
         this.displayVehicle = true;
         this.displaySkybox = true;
+        this.displayBill = true;
+        this.displayTerr = true;
         this.scaleFactorSB = 50;
         this.selectedMaterial = 0;
         this.actualsupply = 0;
@@ -85,6 +84,7 @@ class MyScene extends CGFscene {
             this.billboard.reset();
             this.actualsupply = 0;
             for(let i = 0 ; i < 5 ; i++){
+                this.supplies[i].tempodequeda = 0;
                 this.supplies[i].state = SupplyStates.INACTIVE;
                 this.supplies[i].y = 0;
             }
@@ -200,20 +200,8 @@ class MyScene extends CGFscene {
         this.pushMatrix();
 
         // ---- BEGIN Primitive drawing section
-        if (this.displaySphere){
-            this.sphereMaterial.apply();
-            this.sphere.display();
-            this.setDefaultAppearance();
-        }
-
-        if(this.displayCylinder){
-            this.cilindro.display();
-        }
-
         for (let i=0 ; i<5; i++)
             this.supplies[i].display();
-
-
 
         if(this.displaySkybox){
             this.pushMatrix();
@@ -231,12 +219,15 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
 
-        this.pushMatrix();
-        this.translate(0, 0.1 ,0);
-        this.terrain.display(this.scaleFactorSB);
-        this.popMatrix();
+        if(this.displayTerr) {
+            this.pushMatrix();
+            this.translate(0, 0.1, 0);
+            this.terrain.display(this.scaleFactorSB);
+            this.popMatrix();
+        }
 
-        this.billboard.display();
+        if(this.displayBill)
+            this.billboard.display();
 
         this.popMatrix();
 

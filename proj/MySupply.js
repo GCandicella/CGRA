@@ -44,7 +44,7 @@ class MySupply extends CGFobject {
             if(this.tempodequeda >= 3){
                 this.state = SupplyStates.LANDED;
             }
-            this.posicao.y -= this.tempodequeda/3;
+            this.posicao.y = (3-this.tempodequeda)*(8/3);
         }
 
         if(this.state === SupplyStates.LANDED){
