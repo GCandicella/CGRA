@@ -22,7 +22,7 @@ class MyVehicle extends CGFobject {
 
         this.angleY = 0;
         this.velocidade = 0;
-        this.posicao = {x: 0, y: 0, z: 0};
+        this.posicao = {x: 0, y: 10, z: 0};
 
         // Flag Shader
         this.flagshader = new CGFshader(this.scene.gl, 'shaders/flag.vert', 'shaders/flag.frag');
@@ -210,7 +210,7 @@ class MyVehicle extends CGFobject {
     }
 
     reset(){
-        this.posicao = {x:0, y:0, z:0};
+        this.posicao = {x:0, y:10, z:0};
         this.angleY = 0;
         this.velocidade = 0;
         AutoPilot = 0;

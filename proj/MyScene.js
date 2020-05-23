@@ -161,7 +161,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(1.6, 1.6, 350, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(1.6, 1.6, 800, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -217,6 +217,7 @@ class MyScene extends CGFscene {
 
         if(this.displaySkybox){
             this.pushMatrix();
+            this.translate(0, 25, 0);
             this.materials[this.selectedMaterial].apply();
             this.scale(this.scaleFactorSB, this.scaleFactorSB, this.scaleFactorSB);
             this.skybox.display();
@@ -231,7 +232,7 @@ class MyScene extends CGFscene {
         }
 
         this.pushMatrix();
-        this.translate(0,-0.5 * this.scaleFactorSB + 0.1,0);
+        this.translate(0, 0.1 ,0);
         this.terrain.display(this.scaleFactorSB);
         this.popMatrix();
 

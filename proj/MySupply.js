@@ -4,11 +4,7 @@ const SupplyStates = {
     LANDED: 2
 };
 
-/**
- * "L" lança um mantimento
- * Deverá demorar 3 segundos a atingir o plano XZ
- * "R" remove os mantimentos da cena e disponibiliza-os para novos lançamentos
- */
+
 class MySupply extends CGFobject {
     constructor(scene) {
         super(scene);
@@ -50,8 +46,9 @@ class MySupply extends CGFobject {
             }
             this.posicao.y -= this.tempodequeda/3;
         }
+
         if(this.state === SupplyStates.LANDED){
-            this.posicao.y = -20;
+            this.posicao.y = 2;
         }
     }
 

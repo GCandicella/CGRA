@@ -18,7 +18,7 @@ void main() {
 	vec4 terrainmap = texture2D(terrainMap, vTextureCoord);
 	float total = (terrainmap.b + terrainmap.r + terrainmap.g)/3.0;	// Average
 
-	offset = aVertexNormal * total * 0.15;
+	offset = aVertexNormal * total * 0.1;
 	offset.z = offset.z > MAXIMUM_HEIGHT ? MAXIMUM_HEIGHT : offset.z;
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
